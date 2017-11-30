@@ -3,15 +3,15 @@
 CORES=`cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1`
 MPD_PID=`/bin/pidof mpd`
 
-echo "Setting custom ondemand scheduling policies"
-echo 10000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-echo 0 > /sys/devices/system/cpu/cpufreq/ondemand/ignore_nice_load
-echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+#echo "Setting custom ondemand scheduling policies"
+#echo 10000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+#echo 0 > /sys/devices/system/cpu/cpufreq/ondemand/ignore_nice_load
+#echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+#echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+#echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
 
-echo "Renicing MPD"
-/usr/bin/renice -n -19 $MPD_PID
+#echo "Renicing MPD"
+#/usr/bin/renice -n -19 $MPD_PID
 
 if [ "$CORES" -gt 2 ]; then
     echo "Setting MPD Affinity"
@@ -19,3 +19,7 @@ if [ "$CORES" -gt 2 ]; then
 else
     echo "Not enough cores to set MPD affinity"
 fi
+
+echo "Setting RT Priority for mpd"
+chrt -f -p 54 $MPD_PID
+

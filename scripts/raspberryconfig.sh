@@ -79,6 +79,12 @@ cp /boot/.firmware_revision /boot/.firmware_revision_kernel
 echo "Updating bootloader files *.elf *.dat *.bin"
 echo y | SKIP_KERNEL=1 rpi-update $FIRMWARE_COMMIT
 
+###############DIRTY TEMPORARY PATCH FOR RT KERNEL V7
+
+wget http://repo.volumio.org/Volumio2/Binaries/Kernels/pi-kernel-4.9.65.tar.gz
+tar xvf pi-kernel-4.9.65.tar.gz --no-same-owner -C /
+rm pi-kernel-4.9.65.tar.gz
+
 echo "Blocking unwanted libraspberrypi0, raspberrypi-bootloader, raspberrypi-kernel installs"
 # these packages critically update kernel & firmware files and break Volumio
 # may be triggered by manual or plugin installs explicitly or through dependencies like chromium, sense-hat, picamera,...
