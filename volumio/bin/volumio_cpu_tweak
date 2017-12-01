@@ -21,5 +21,6 @@ else
 fi
 
 echo "Setting RT Priority for mpd"
+//TODO USE A POST START SYSTEMD UNIT
 chrt -f -p -a 54 $MPD_PID
 
