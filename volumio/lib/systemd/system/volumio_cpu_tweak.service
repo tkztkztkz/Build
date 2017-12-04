@@ -1,6 +1,7 @@
 [Unit]
 Description = Volumio Cpu Tweaker
 After=volumio.service
+ReloadPropagatedFrom=mpd.service
 
 [Service]
 ExecStart=/bin/volumio_cpu_tweak
