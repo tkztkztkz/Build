@@ -9,7 +9,7 @@ echo "Renicing MPD"
 if [ -f "/boot/rt" ]; then
     echo "Real-time Kernel Environment"
     echo "Setting RT Priority for mpd"
-    /usr/bin/chrt -f -p -a 80 $MPD_PID
+    /usr/bin/chrt -f -p -a 34 $MPD_PID
 else
         if [ "$CORES" -gt 2 ]; then
                 echo "Setting MPD Affinity"
