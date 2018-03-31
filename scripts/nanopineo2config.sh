@@ -23,6 +23,9 @@ if [ $ARCH = armv7 ]; then
   echo "Armv7 Environment detected"
   echo "#!/bin/sh
 sysctl abi.cp15_barrier=2
+echo 816000 | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+echo 8 > /proc/irq/6/smp_affinity
+echo 4 > /proc/irq/7/smp_affinity
 " > /usr/local/bin/nanopineo2-init.sh
   chmod +x /usr/local/bin/nanopineo2-init.sh
 

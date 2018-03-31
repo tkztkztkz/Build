@@ -70,7 +70,7 @@ else
 	echo "Clone nanopineo2 files from repo"
     sudo mkdir platform-nanopineo2
     cd platform-nanopineo2
-	wget https://github.com/volumio/nanopineo2-platform/raw/master/nanopineo2.tar.xz
+	wget https://github.com/tkztkztkz/nanopineo2-platform/raw/master/nanopineo2.tar.xz
 	echo "Unpack the platform files"
 	tar xfJ nanopineo2.tar.xz
 	rm nanopineo2.tar.xz
@@ -108,7 +108,7 @@ sudo mount -t vfat "${BOOT_PART}" /mnt/volumio/rootfs/boot
 echo "Copying Volumio RootFs"
 sudo cp -pdR build/$ARCH/root/* /mnt/volumio/rootfs
 echo "Copying nanopineo2 boot files"
-sudo cp platform-nanopineo2/nanopineo2/boot/Image /mnt/volumio/rootfs/boot
+sudo cp platform-nanopineo2/nanopineo2/boot/Image* /mnt/volumio/rootfs/boot
 sudo cp platform-nanopineo2/nanopineo2/boot/*.dtb /mnt/volumio/rootfs/boot
 
 sudo cp platform-nanopineo2/nanopineo2/boot/boot.cmd /mnt/volumio/rootfs/boot
