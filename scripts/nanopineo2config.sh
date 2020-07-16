@@ -21,11 +21,16 @@ echo $ARCH
 
 if [ $ARCH = armv7 ]; then
   echo "Armv7 Environment detected"
-  echo "#!/bin/sh
+  echo -e "#!/bin/sh
 sysctl abi.cp15_barrier=2
 echo 816000 | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
 echo 8 > /proc/irq/6/smp_affinity
 echo 4 > /proc/irq/7/smp_affinity
+GUILIST=\`find /boot -name \"gui_*\"\`
+
+for gui_name in \$GUILIST; do
+ /usr/local/bin/mpd_gui.cpp.o_\${gui_name##*/gui_} &
+done
 " > /usr/local/bin/nanopineo2-init.sh
   chmod +x /usr/local/bin/nanopineo2-init.sh
 
@@ -33,6 +38,9 @@ echo 4 > /proc/irq/7/smp_affinity
   /usr/local/bin/nanopineo2-init.sh
   exit 0" > /etc/rc.local
 fi
+
+echo "Asia/Tokyo" > /etc/timezone
+dpkg-reconfigure --frontend noninteractive tzdata
 
 #echo "Adding default sound modules and wifi"
 #echo "sunxi_codec
@@ -45,7 +53,8 @@ fi
 #echo "blacklist 8723bs_vq0" >> /etc/modprobe.d/blacklist-nanopineo2.conf
 
 echo "Installing additonal packages"
-#apt-get update
+apt-get update
+apt-get -y install device-tree-compiler fonts-takao-gothic libcv2.4 libtag1c2a libopencv-contrib2.4 libopencv-gpu2.4 libopencv-ocl2.4 libopencv-stitching2.4 libopencv-superres2.4 libopencv-ts2.4 libopencv-videostab2.4
 #apt-get -y install u-boot-tools liblircclient0 lirc
 
 echo "Cleaning APT Cache and remove policy file"

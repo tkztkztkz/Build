@@ -121,6 +121,11 @@ echo "Copying nanopineo2 modules and firmware"
 sudo cp -pdR platform-nanopineo2/nanopineo2/lib/modules /mnt/volumio/rootfs/lib/
 sudo cp -pdR platform-nanopineo2/nanopineo2/lib/firmware /mnt/volumio/rootfs/lib/
 
+echo "Copying nanopineo specific binaries"
+sudo cp -pdR platform-nanopineo2/nanopineo2/usr/local /mnt/volumio/rootfs/usr/
+sudo touch /mnt/volumio/rootfs/boot/ssh
+#sudo touch /mnt/volumio/rootfs/boot/gui
+
 echo "Confguring ALSA with sane defaults"
 #sudo cp platform-nanopineo2/nanopineo2/var/lib/alsa/* /mnt/volumio/rootfs/var/lib/alsa
 
